@@ -2,10 +2,19 @@
 
 ## Description
 L'application est le site d'une agence evenementielle.
-## Pre-requis
+
+## Requires
+
+>  `Your terminal` / `Your IDE`
+
 - NodeJS  >= v16.14.1
 
-## Installation
+## Install 🛠️
+
+```bash
+git clone https://github.com/HiroFr/OC_Project-10_Debuggez_une_application_React.JS.git
+```
+
 - `yarn install`
 
 ## Lancement de l'application
