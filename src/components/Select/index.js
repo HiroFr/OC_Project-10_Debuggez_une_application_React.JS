@@ -15,17 +15,22 @@ const Select = ({
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
+
   const changeValue = (newValue) => {
-    onChange();
-    setValue(newValue);
-    setCollapsed(newValue);
+    onChange(newValue); // call the onChange function
+    setValue(newValue); // update the value
+    setCollapsed(true); // close the dropdown
   };
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
-          <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
+          <li
+            className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
+            onClick={() => setCollapsed(!collapsed)}
+          >
             {value || (!titleEmpty && "Toutes")}
           </li>
           {!collapsed && (
@@ -36,14 +41,14 @@ const Select = ({
                   Toutes
                 </li>
               )}
-              {selection.map((s) => (
-                <li key={s} onClick={() => changeValue(s)}>
+              {selection.map((categorieSelected) => (
+                <li key={categorieSelected} onClick={() => changeValue(categorieSelected)}>
                   <input
-                    defaultChecked={value === s}
+                    defaultChecked={value === categorieSelected}
                     name="selected"
                     type="radio"
                   />{" "}
-                  {s}
+                  {categorieSelected}
                 </li>
               ))}
             </>

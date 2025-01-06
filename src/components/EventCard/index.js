@@ -6,7 +6,7 @@ import "./style.scss";
 const EventCard = ({
   imageSrc,
   imageAlt,
-  date = new Date(),
+  date,
   title,
   label,
   small = false,
