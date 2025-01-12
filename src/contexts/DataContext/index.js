@@ -19,17 +19,21 @@ export const api = {
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [last, setLast] = useState(null);
   const getData = useCallback(async () => {
     try {
-      setData(await api.loadData());
+      const result = await api.loadData(); // Call the API
+      setData(result); // Set the data
+      setLast(result.events[result.events.length - 1]); // Set the last event
     } catch (err) {
       setError(err);
     }
   }, []);
+
   useEffect(() => {
-    if (data) return;
-    getData();
-  });
+    if (data) return; // If data is already loaded, we don't need to call the API
+    getData(); // Call the API
+  }, [data, getData]);
   
   return (
     <DataContext.Provider
@@ -37,6 +41,7 @@ export const DataProvider = ({ children }) => {
       value={{
         data,
         error,
+        last,
       }}
     >
       {children}
