@@ -22,17 +22,17 @@ export const DataProvider = ({ children }) => {
   const [last, setLast] = useState(null);
   const getData = useCallback(async () => {
     try {
-      const result = await api.loadData(); // Call the API
-      setData(result); // Set the data
-      setLast(result.events[result.events.length - 1]); // Set the last event
+      const result = await api.loadData(); // Appeler l'API
+      setData(result); // Définir les données
+      setLast(result.events[result.events.length - 1]); // Définir le dernier événement
     } catch (err) {
       setError(err);
     }
   }, []);
 
   useEffect(() => {
-    if (data) return; // If data is already loaded, we don't need to call the API
-    getData(); // Call the API
+    if (data) return; // Si les données sont déjà chargées, nous n'avons pas besoin d'appeler l'API
+    getData(); // Appeler l'API
   }, [data, getData]);
   
   return (

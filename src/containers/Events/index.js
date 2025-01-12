@@ -11,14 +11,14 @@ const PER_PAGE = 9;
 
 const EventList = () => {
   const { data, error } = useData();
-  const [type, setType] = useState(); // add a state to store the selected type
+  const [type, setType] = useState(); // ajouter un état pour stocker le type sélectionné
   const [currentPage, setCurrentPage] = useState(1);
 
   // Filtrer les événements en fonction de la catégorie sélectionnée
   const filteredEvents = (
     (!type
       ? data?.events
-      : data?.events.filter((event) => event.type === type)) || [] // filter the events
+      : data?.events.filter((event) => event.type === type)) || [] // filtrer les événements
   ).filter((event, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
@@ -29,18 +29,18 @@ const EventList = () => {
     return false;
   });
 
-  const changeType = (evtType) => {
+  const changeType = (eventType) => {
     setCurrentPage(1);
-    setType(evtType);
+    setType(eventType);
   };
 
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
   return (
     <>
-      {error && <div>An error occured</div>}
+      {error && <div>Une erreur s&apos;est produite</div>}
       {data === null ? (
-        "loading"
+        "chargement"
       ) : (
         <>
           <h3 className="SelectTitle">Catégories</h3>

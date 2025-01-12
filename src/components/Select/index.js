@@ -17,9 +17,9 @@ const Select = ({
   const [collapsed, setCollapsed] = useState(true);
 
   const changeValue = (newValue) => {
-    onChange(newValue); // call the onChange function
-    setValue(newValue); // update the value
-    setCollapsed(true); // close the dropdown
+    onChange(newValue); // appeler la fonction onChange
+    setValue(newValue); // mettre à jour la valeur
+    setCollapsed(true); // fermer le menu déroulant
   };
 
   return (

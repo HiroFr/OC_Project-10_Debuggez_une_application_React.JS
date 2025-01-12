@@ -14,17 +14,17 @@ const Slider = () => {
     setIndex(index < byDateDesc.length - 1 ? index + 1 : 0)
   };
 
-  useEffect(() => { // useEffect to change card every 5 seconds
+  useEffect(() => { // useEffet pour changer de carte toutes les 5 secondes
     const timeout = setTimeout(() => {
-      nextCard(); // call nextCard function
+      nextCard(); // appeler la fonction nextCard
     }, 5000);
-    return () => clearTimeout(timeout); // clear timeout on unmount
-  }, [nextCard]); // run useEffect when nextCard function changes
+    return () => clearTimeout(timeout); // effacer le délai d'expiration lors du démontage
+  }, [nextCard]); // exécuter useEffect lorsque la fonction nextCard change
 
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={index}> {/* key should be unique */}
+        <div key={index}> {/* la clé doit être unique */}
         <div
           key={event.id}
           className={`SlideCard SlideCard--${index === idx ? "display" : "hide"}`}
@@ -42,7 +42,7 @@ const Slider = () => {
           <div className="SlideCard__pagination">
             {byDateDesc.map((_, radioIdx) => (
               <input
-                key={`${index}`} /* key should be unique */
+                key={`${index}`} /* la clé doit être unique */
                 type="radio"
                 name="radio-button"
                 checked={index === radioIdx}
