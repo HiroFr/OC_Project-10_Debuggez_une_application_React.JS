@@ -7,28 +7,28 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtB.date) - new Date(evtA.date)
-  );
-  const nextCard = () => {
-    setIndex(index < byDateDesc.length - 1 ? index + 1 : 0)
-  };
 
-  useEffect(() => { // useEffet pour changer de carte toutes les 5 secondes
+  const byDateDesc = data?.focus.sort(
+    (evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)
+  );
+
+  useEffect(() => {
+    // useEffet pour changer de carte toutes les 5 secondes
     const timeout = setTimeout(() => {
-      nextCard(); // appeler la fonction nextCard
-    }, 5000);
-    return () => clearTimeout(timeout); // effacer le délai d'expiration lors du démontage
-  }, [nextCard]); // exécuter useEffect lorsque la fonction nextCard change
+      setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
+    }, 5000); // Change l'index de la carte après 5 secondes
+    return () => clearTimeout(timeout); // Nettoie le timeout lors du démontage du composant
+  }, [byDateDesc]);
 
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={index}> {/* la clé doit être unique */}
         <div
-          key={event.id}
-          className={`SlideCard SlideCard--${index === idx ? "display" : "hide"}`}
-          >
+          key={Math.random()}
+          className={`SlideCard SlideCard--${
+            index === idx ? "display" : "hide"
+          }`}
+        >
           <img src={event.cover} alt="forum" />
           <div className="SlideCard__descriptionContainer">
             <div className="SlideCard__description">
@@ -38,21 +38,20 @@ const Slider = () => {
             </div>
           </div>
         </div>
-        <div className="SlideCard__paginationContainer">
-          <div className="SlideCard__pagination">
-            {byDateDesc.map((_, radioIdx) => (
-              <input
-                key={`${index}`} /* la clé doit être unique */
-                type="radio"
-                name="radio-button"
-                checked={index === radioIdx}
-                onChange={() => setIndex(radioIdx)}
-              />
-            ))}
-            </div>
-          </div>
-        </div>
       ))}
+      <div className="SlideCard__paginationContainer">
+        <div className="SlideCard__pagination">
+          {byDateDesc?.map((_, radioIdx) => (
+            <input
+              key={Math.random()}
+              type="radio"
+              name="radio-button"
+              checked={index === radioIdx}
+              onChange={() => setIndex(radioIdx)}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
