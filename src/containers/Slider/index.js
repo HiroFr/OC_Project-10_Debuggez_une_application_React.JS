@@ -8,23 +8,26 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  const byDateDesc = data?.focus.sort(
-    (evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)
+  // trie par ordre décroissant
+  const byDateDesc = data?.focus.sort( // Récupère les dates du tableau focus dans la data
+    (evtA, evtB) => new Date(evtB.date) - new Date(evtA.date) // Compare les dates
   );
 
   useEffect(() => {
-    // useEffet pour changer de carte toutes les 5 secondes
-    const timeout = setTimeout(() => {
-      setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
-    }, 5000); // Change l'index de la carte après 5 secondes
-    return () => clearTimeout(timeout); // Nettoie le timeout lors du démontage du composant
+    // useEffet pour changer de slide toutes les 5 secondes
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => // Change l'index de la slide
+        prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0
+      );
+    }, 5000); // Change l'index de la slide après 5 secondes
+    return () => clearInterval(interval); // Nettoie le timeout lors du démontage du composant
   }, [byDateDesc]);
 
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
         <div
-          key={Math.random()}
+          key={Math.random()} // Key unique
           className={`SlideCard SlideCard--${
             index === idx ? "display" : "hide"
           }`}
@@ -43,7 +46,7 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc?.map((_, radioIdx) => (
             <input
-              key={Math.random()}
+              key={Math.random()} // Key unique
               type="radio"
               name="radio-button"
               checked={index === radioIdx}

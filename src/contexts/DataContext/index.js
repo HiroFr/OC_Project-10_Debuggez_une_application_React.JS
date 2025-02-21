@@ -32,7 +32,7 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     if (data) return; // Si les données sont déjà chargées, nous n'avons pas besoin d'appeler l'API
-    getData(); // Appeler l'API
+    getData(); // Sinon on appeler l'API
   }, [data, getData]);
   
   return (

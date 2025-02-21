@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState } from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 import "./style.scss";
 
@@ -27,24 +27,24 @@ const Select = ({
       {label && <div className="label">{label}</div>}
       <div className="Select">
         <ul>
-          <li
+          <li // Quand on clique sur le selecteur
             className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => setCollapsed(!collapsed)} // On l'affiche
           >
             {value || (!titleEmpty && "Toutes")}
           </li>
-          {!collapsed && (
+          {!collapsed && ( // Si affiché
             <>
-              {!titleEmpty && (
+              {!titleEmpty && ( // Par défaut, on affiche son titre
                 <li onClick={() => changeValue(null)}>
                   <input defaultChecked={!value} name="selected" type="radio" />{" "}
                   Toutes
                 </li>
               )}
-              {selection.map((categorieSelected) => (
+              {selection.map((categorieSelected) => ( // Pour chaque catégorie sélectionnée, afficher son titre
                 <li key={categorieSelected} onClick={() => changeValue(categorieSelected)}>
                   <input
-                    defaultChecked={value === categorieSelected}
+                    defaultChecked={value === categorieSelected} // Associe la valeur de la catégorie sélectionné
                     name="selected"
                     type="radio"
                   />{" "}
